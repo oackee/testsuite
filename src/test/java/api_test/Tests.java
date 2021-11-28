@@ -2,10 +2,11 @@ package api_test;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.FixMethodOrder;
-import org.junit.Test;
+import org.junit.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.runners.MethodSorters;
 
 import java.util.HashMap;
@@ -29,8 +30,8 @@ import static org.hamcrest.Matchers.*;
         private static String surname = "Bourne";
         private static String email = "foma"+ randomNumber + "@cia.com";
 
-        @Before
-        public void start() {
+        @BeforeClass
+        public static void start() {
 
             RestAssured.baseURI = API_URI;
 
@@ -176,8 +177,9 @@ import static org.hamcrest.Matchers.*;
         }
 
 
-        @After
-        public void finish() {
+        @AfterClass
+        public static void finish() {
+
         }
 
  }
