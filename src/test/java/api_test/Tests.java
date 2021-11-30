@@ -3,10 +3,6 @@ package api_test;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.junit.*;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.runners.MethodSorters;
 
 import java.util.HashMap;
@@ -17,21 +13,11 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.Matchers.*;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-    public class Tests extends BaseTest{
+    public class Tests extends BaseTest {
 
-        private static String accessToken;
-        private static String usersAccessToken;
-        private static int userId;
-        private static int randomNumber = 1 + (int) (Math.random() * 10000000);
-
-
-        private static String username = "kinyaev" + randomNumber;
-        private static String name = "Jason";
-        private static String surname = "Bourne";
-        private static String email = "foma"+ randomNumber + "@cia.com";
 
         @BeforeClass
-        public static void start() {
+        public static void setUp() {
 
             RestAssured.baseURI = API_URI;
 
@@ -50,7 +36,7 @@ import static org.hamcrest.Matchers.*;
                             //.log().all()
                             .auth()
                             .preemptive()
-                            .basic(basicAuthUsername, "")
+                            .basic(BASIC_AUTH_USERNAME, "")
                             .contentType(ContentType.JSON)
                             .body(body)
                             .when().post(AUTH_METHOD)
@@ -61,6 +47,8 @@ import static org.hamcrest.Matchers.*;
                             .extract().jsonPath().getString("access_token");
 
             accessToken = "Bearer " + response;
+
+            System.out.println("1. The response code are correct (200), the token was received successfully");
 
         }
 
@@ -103,6 +91,8 @@ import static org.hamcrest.Matchers.*;
 
             userId = response;
 
+            System.out.println("2. The response code and JSON schema are correct (201). New user created successfully");
+
         }
 
 
@@ -119,7 +109,7 @@ import static org.hamcrest.Matchers.*;
                             //.log().all()
                             .auth()
                             .preemptive()
-                            .basic(basicAuthUsername, "")
+                            .basic(BASIC_AUTH_USERNAME, "")
                             .contentType(ContentType.JSON)
                             .body(body)
                             .when().post(AUTH_METHOD)
@@ -131,6 +121,8 @@ import static org.hamcrest.Matchers.*;
                             .extract().jsonPath().getString("access_token");
 
             usersAccessToken = "Bearer " + response;
+
+            System.out.println("3. The response code are correct (200), the token was received successfully");
 
         }
 
@@ -159,6 +151,8 @@ import static org.hamcrest.Matchers.*;
                             .body("is_verified", equalTo(false)).and()
                             .statusCode(200);
 
+            System.out.println("4. The response code are correct (200), the  response matches the specification");
+
         }
 
 
@@ -169,16 +163,18 @@ import static org.hamcrest.Matchers.*;
                             //.log().all()
                             .header("Authorization", usersAccessToken)
                             .contentType(ContentType.JSON)
-                            .when().get(MANAGE_PLAYERS_METHOD + "/" + (randomNumber))
+                            .when().get(MANAGE_PLAYERS_METHOD + "/" + (userId + randomNumber))
                             .then()
                             .assertThat()
                             .statusCode(404);
+
+            System.out.println("5. The response code are correct (404). A non-existent user was not found");
 
         }
 
 
         @AfterClass
-        public static void finish() {
+        public static void tearDown() {
 
         }
 
