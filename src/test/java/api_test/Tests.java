@@ -43,6 +43,7 @@ import static org.hamcrest.Matchers.*;
                             .then()
                             .assertThat()
                             .statusCode(200).and()
+                            //.time(lessThan(4000L)).and()
                             .body("access_token", notNullValue())
                             .extract().jsonPath().getString("access_token");
 
@@ -87,6 +88,7 @@ import static org.hamcrest.Matchers.*;
                             .body("bonuses_allowed", equalTo(true)).and()
                             .body("is_verified", equalTo(false)).and()
                             .statusCode(201)
+                            //.time(lessThan(4000L)).and()
                             .extract().jsonPath().getInt("id");
 
             userId = response;
@@ -116,6 +118,7 @@ import static org.hamcrest.Matchers.*;
                             .then()
                             .assertThat()
                             .statusCode(200).and()
+                            //.time(lessThan(4000L)).and()
                             .body("access_token", notNullValue()).and()
                             .body("refresh_token", notNullValue())
                             .extract().jsonPath().getString("access_token");
@@ -149,6 +152,7 @@ import static org.hamcrest.Matchers.*;
                             .body("birthdate", equalTo(null)).and()
                             .body("bonuses_allowed", equalTo(true)).and()
                             .body("is_verified", equalTo(false)).and()
+                            //.time(lessThan(4000L)).and()
                             .statusCode(200);
 
             System.out.println("4. The response code are correct (200), the  response matches the specification");
@@ -166,6 +170,7 @@ import static org.hamcrest.Matchers.*;
                             .when().get(MANAGE_PLAYERS_METHOD + "/" + (userId + randomNumber))
                             .then()
                             .assertThat()
+                            //.time(lessThan(4000L)).and()
                             .statusCode(404);
 
             System.out.println("5. The response code are correct (404). A non-existent user was not found");

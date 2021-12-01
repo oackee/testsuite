@@ -106,7 +106,7 @@ public class Tests extends BaseTest {
 
     }
 
-
+    //@Ignore
     @Test
     public void test4_playersTableDescendingSort() throws InterruptedException {
 
