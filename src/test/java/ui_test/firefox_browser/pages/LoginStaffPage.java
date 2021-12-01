@@ -1,4 +1,4 @@
-package ui_test.pages;
+package ui_test.firefox_browser.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

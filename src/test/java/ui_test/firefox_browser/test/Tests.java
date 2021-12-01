@@ -1,14 +1,15 @@
-package ui_test.test;
+package ui_test.firefox_browser.test;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.*;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import ui_test.pages.LoginStaffPage;
-import ui_test.pages.MainStaffPage;
-import ui_test.pages.PlayersStaffPage;
+import ui_test.chrome_browser.pages.LoginStaffPage;
+import ui_test.chrome_browser.pages.MainStaffPage;
+import ui_test.chrome_browser.pages.PlayersStaffPage;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -21,8 +22,8 @@ public class Tests extends BaseTest {
     @Before
     public void setUp() {
 
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
+        WebDriverManager.firefoxdriver().setup();
+        driver = new FirefoxDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         wait = new WebDriverWait(driver, 15);
@@ -47,7 +48,7 @@ public class Tests extends BaseTest {
         Assert.assertEquals(true, mainPage.dashboardActiveSessions.isDisplayed());
         Assert.assertEquals(true, mainPage.dashboardWithdrawalRequests.isDisplayed());
 
-        System.out.println("1. User logged in successfully. Staff panel loaded successfully");
+        System.out.println("1. _Firefox_ User logged in successfully. Staff panel loaded successfully");
 
     }
 
@@ -66,7 +67,7 @@ public class Tests extends BaseTest {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         Assert.assertEquals(true, playersPage.playersTable.isDisplayed());
 
-        System.out.println("2. Players table loaded successfully and displayed");
+        System.out.println("2. _Firefox_ Players table loaded successfully and displayed");
 
     }
 
@@ -102,7 +103,7 @@ public class Tests extends BaseTest {
         Assert.assertEquals(true, date1.isBefore(date2) && date2.isBefore(date3));
 
 
-        System.out.println("3. Ascending sort works correctly");
+        System.out.println("3. _Firefox_ Ascending sort works correctly");
 
     }
 
@@ -140,7 +141,7 @@ public class Tests extends BaseTest {
         Assert.assertEquals(true, date1.isAfter(date2) && date2.isAfter(date3));
 
 
-        System.out.println("4. Descending sort works correctly");
+        System.out.println("4. _Firefox_ Descending sort works correctly");
 
     }
 

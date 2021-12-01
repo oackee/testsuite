@@ -1,10 +1,10 @@
-package ui_test.test;
+package ui_test.chrome_browser.test;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import ui_test.pages.LoginStaffPage;
-import ui_test.pages.MainStaffPage;
-import ui_test.pages.PlayersStaffPage;
+import ui_test.chrome_browser.pages.LoginStaffPage;
+import ui_test.chrome_browser.pages.MainStaffPage;
+import ui_test.chrome_browser.pages.PlayersStaffPage;
 
 public class BaseTest {
 
